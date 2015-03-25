@@ -16,7 +16,7 @@ let repo = GTRepository.cloneFromURL(url!, toWorkingDirectory: workdirURL!, opti
         // checkoutProgressBlock:^(NSString *path, NSUInteger completedSteps, NSUInteger totalSteps) {
         println()
     }
-)
+) as! GTRepository
 
 if let myError = error {
     println("\(myError)")
