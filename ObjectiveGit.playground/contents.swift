@@ -1,3 +1,7 @@
+//
+// This playground must be opened using the enclosed workspace in order for the
+// ObjectiveGit module to be available.
+//
 import ObjectiveGit
 
 let url = NSURL(string: "https://github.com/phatblat/objective-git.git") as NSURL?
