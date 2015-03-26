@@ -1,0 +1,8 @@
+framework module ObjectiveGit {
+    umbrella header "libgit2_shims.h"
+
+    //header "git2/attr.h"
+    
+    export *
+    module * { export * }
+}
