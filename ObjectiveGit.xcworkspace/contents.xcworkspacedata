@@ -5,6 +5,9 @@
       location = "group:CloneFromGitHub.playground">
    </FileRef>
    <FileRef
+      location = "group:CloneFromLocal.playground">
+   </FileRef>
+   <FileRef
       location = "group:objective-git/ObjectiveGitFramework.xcodeproj">
    </FileRef>
    <FileRef
