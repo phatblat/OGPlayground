@@ -7,31 +7,30 @@ import XCPlayground
 
 XCPSetExecutionShouldContinueIndefinitely(continueIndefinitely: true)
 
+var error: NSError? = nil
 let fileManager = NSFileManager.defaultManager()
 
 // MARK: - Clone
 
-
-let remoteURL = NSURL(fileURLWithPath: <#String#>)
-    string: "file://github.com/phatblat/objective-git.git") as NSURL?
 // directory containing data shared between all playgrounds
-let workdirPath = XCPSharedDataDirectoryPath + "/objective-git"
-let workdirURL = NSURL.fileURLWithPath(workdirPath)
-var error: NSError? = nil
+if let remoteURL = NSURL(fileURLWithPath: XCPSharedDataDirectoryPath + "/SwiftTestRepo.git"),
+    let workdirURL = NSURL(fileURLWithPath: XCPSharedDataDirectoryPath + "/SwiftTestRepo") {
 
-fileManager.
-
-let success = fileManager.createDirectoryAtPath(workdirPath, withIntermediateDirectories: true, attributes: nil, error: &error)
-
-let repo = GTRepository.cloneFromURL(url!, toWorkingDirectory: workdirURL!, options: [:], error: &error,
-    transferProgressBlock: { (gt_progress, stop) -> Void in
-        // transferProgressBlock:^(const git_transfer_progress *gt_progress, BOOL *stop) {
-        println("transfer")
-    }, checkoutProgressBlock: { (path, completedSteps, totalSteps) -> Void in
-        // checkoutProgressBlock:^(NSString *path, NSUInteger completedSteps, NSUInteger totalSteps) {
-        println("checkout")
+    //let success = fileManager.createDirectoryAtPath(workdirPath, withIntermediateDirectories: true, attributes: nil, error: &error)
+    if fileManager.fileExistsAtPath(workdirURL.path!) {
+        fileManager.removeItemAtPath(workdirURL.path!, error: &error)
     }
-) as? GTRepository
+
+    let repo = GTRepository.cloneFromURL(remoteURL, toWorkingDirectory: workdirURL, options: [:], error: &error,
+        transferProgressBlock: { (gt_progress, stop) -> Void in
+            // transferProgressBlock:^(const git_transfer_progress *gt_progress, BOOL *stop) {
+            println("transfer")
+        }, checkoutProgressBlock: { (path, completedSteps, totalSteps) -> Void in
+            // checkoutProgressBlock:^(NSString *path, NSUInteger completedSteps, NSUInteger totalSteps) {
+            println("checkout \(path) \(completedSteps)/\(totalSteps)")
+        }
+    ) as? GTRepository
+}
 
 if let myError = error {
     println("\(myError)")
