@@ -17,3 +17,7 @@ Then, open **ObjectiveGit.xcworkspace**. The playground won't work by itself as 
 mkdir "$HOME/Documents/Shared Playground Data"
 ```
 
+
+## License
+
+This repo is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for rights and limitations.
